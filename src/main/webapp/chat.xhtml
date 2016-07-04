@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="static/layout.xhtml">
+
+	<meta http-equiv="X-UA-Compatible" />
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+
+	<!-- Menu -->
+	<ui:define name="menu" />
+
+	<!-- Content -->
+	<ui:define name="content">
+		<h:form id="tab_form" onkeypress="if (event.keyCode == 13) { return false; }">
+			<p:commandButton value="Add Tab" actionListener="#{chat.tabAddActionListener}" update=":growl,tabs" />
+			<p:commandButton value="Clear" actionListener="#{chat.tabClearActionListener}" update=":growl,tabs" />
+			<p:tabView id="tabs" var="tab" value="#{chat.tabManager.tabs}" activeIndex="#{chat.tabManager.activeIndex}" dynamic="true">
+				<p:tab title="#{tab.title}" closable="#{tab.closable}">
+					<!-- tab: #{tab} -->
+					<!-- model: #{tab.model} -->
+					<!-- messages: #{tab.model.buffer} -->
+					<p:panelGrid>
+						<p:row>
+							<p:column colspan="2">
+								<p:inputTextarea value="#{tab.model.buffer}" readonly="true"/>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:inputText value="#{text}"/>
+							</p:column>
+							<p:column>
+								<p:commandButton value="Send" actionListener="#{chat.channelMessageActionListener}" update="@form">
+									<f:attribute name="channelId" value=""/>
+									<f:attribute name="model" value="#{tab.model}"/>
+									<f:attribute name="text" value="#{text}"/>
+								</p:commandButton>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</p:tab>
+				<p:ajax event="tabClose" listener="#{chat.tabCloseEventListener}" update=":growl,tabs" />
+				<p:ajax event="tabChange" listener="#{chat.tabChangeEventListener}" update=":growl,tabs" />
+			</p:tabView>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

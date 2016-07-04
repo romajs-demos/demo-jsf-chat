@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure id="webAppCtx" class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<New id="UserDS-hsqldb" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg></Arg>
+		<Arg>java:/comp/env/jdbc/UserDS</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">org.hsqldb.jdbc.JDBCDriver</Set>
+				<Set name="url">jdbc:hsqldb:mem:UserDB;sql.syntax_ora=true</Set>
+				<Set name="username">sa</Set>
+				<Set name="password">sa</Set>
+			</New>
+		</Arg>
+	</New>
+
+<!-- 	<New id="UserDS-unknown" class="org.eclipse.jetty.plus.jndi.Resource"> -->
+<!-- 		<Arg></Arg> -->
+<!-- 		<Arg>java:/comp/env/jdbc/UserDS</Arg> -->
+<!-- 		<Arg> -->
+<!-- 			<New class="org.apache.commons.dbcp.BasicDataSource"> -->
+<!-- 				<Set name="driverClassName">org.hsqldb.jdbc.JDBCDriver</Set> -->
+<!-- 				<Set name="url"> -->
+<!-- 					<Env name="URL" /> -->
+<!-- 				</Set> -->
+<!-- 				<Set name="username"> -->
+<!-- 					<Env name="USER" /> -->
+<!-- 				</Set> -->
+<!-- 				<Set name="password"> -->
+<!-- 					<Env name="PASS" /> -->
+<!-- 				</Set> -->
+<!-- 			</New> -->
+<!-- 		</Arg> -->
+<!-- 	</New> -->
+
+<!-- 	<New id="UserTransactionManager" class="org.eclipse.jetty.plus.jndi.Resource"> -->
+<!-- 		<Arg></Arg> -->
+<!-- 		<Arg>java:/TransactionManager</Arg> -->
+<!-- 		<Arg> -->
+<!-- 			<New -->
+<!-- 				class="com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple"> -->
+<!-- 			</New> -->
+<!-- 		</Arg> -->
+<!-- 	</New> -->
+
+<!-- 	<New id="UserTransaction" class="org.eclipse.jetty.plus.jndi.Resource"> -->
+<!-- 		<Arg></Arg> -->
+<!-- 		<Arg>java:comp/UserTransaction</Arg> -->
+<!-- 		<Arg> -->
+<!-- 			<New -->
+<!-- 				class="com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple" /> -->
+<!-- 		</Arg> -->
+<!-- 	</New> -->
+
+<!-- 	<New id="BeanManager" class="org.eclipse.jetty.plus.jndi.Resource"> -->
+<!-- 		<Arg> -->
+<!-- 		</Arg> -->
+<!-- 		<Arg>BeanManager</Arg> -->
+<!-- 		<Arg> -->
+<!-- 			<New class="javax.naming.Reference"> -->
+<!-- 				<Arg>javax.enterprise.inject.spi.BeanManager</Arg> -->
+<!-- 				<Arg>org.jboss.weld.resources.ManagerObjectFactory</Arg> -->
+<!-- 				<Arg /> -->
+<!-- 			</New> -->
+<!-- 		</Arg> -->
+<!-- 	</New> -->
+
+</Configure>

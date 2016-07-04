@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="static/layout.xhtml">
+	<meta http-equiv="X-UA-Compatible" />
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	<!-- Menu -->
+	<ui:define name="menu" />
+	<!-- Content -->
+	<ui:define name="content">
+		<h:panelGroup id="contentPanel" />
+		<p:growl autoUpdate="true" showDetail="true" />
+		<p:dialog id="login_dialog" widgetVar="login_dialog" header="Login"
+			visible="#{!sessionManagedBean.loggedIn}" closable="true"
+			draggable="true" resizable="false" modal="true" appendTo="@(body)"
+			showEffect="fade" hideEffect="fade" width="280"
+			style="font-size: 14px !important">
+			<h:form id="login_form" method="post" prependId="false">
+				<h:panelGrid columns="2" cellpadding="5" width="100%">
+					<h:outputLabel for="j_username" value="Username:" />
+					<h:inputText id="j_username" value="#{sessionManagedBean.username}"
+						required="true" requiredMessage="User name is required." />
+					<h:outputLabel for="j_password" value="Password:" />
+					<h:inputSecret id="j_password"
+						value="#{sessionManagedBean.password}" required="true"
+						requiredMessage="User password is required." />
+				</h:panelGrid>
+				<br />
+				<p:commandButton value="Login"
+					actionListener="#{sessionManagedBean.login}" update=":login_dialog"
+					style="float:right; font-size: 14px !important; width: 80px; height: 30px" />
+				<h:outputText value="romajs @ 2013"
+					style="margin-top:20px;font-size: 9px; float: left" />
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+
+
+
+
+
