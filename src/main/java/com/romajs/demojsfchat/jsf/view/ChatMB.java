@@ -2,34 +2,43 @@ package com.romajs.demojsfchat.jsf.view;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
 
 import com.romajs.demojsfchat.jsf.component.tab.Tab;
 import com.romajs.demojsfchat.jsf.component.tab.TabManager;
+import com.romajs.demojsfchat.service.ChannelService;
 
+@Named("chat")
 @SessionScoped
-@ManagedBean(name = "chat")
 @SuppressWarnings("serial")
 public class ChatMB implements Serializable {
+	
+	@Inject
+	ChannelService channelService;
 
-	int count = 0;
+	final AtomicInteger tabCount = new AtomicInteger();
 
 	private TabManager<ChannelTabModel> tabManager = new TabManager<>();
 
 	@PostConstruct
 	public void init() {
-		tabManager.add(new Tab<ChannelTabModel>("General", new ChannelTabModel(), false));
+		String title = "General";
+		channelService.create(title, null);
+		tabManager.add(new Tab<ChannelTabModel>(title, new ChannelTabModel(), false));
 	}
 
 	public void tabAddActionListener() {
-		tabManager.add(new Tab<ChannelTabModel>("Title " + (++count), new ChannelTabModel(), true));
+		String title = "Title " + (tabCount.addAndGet(1));
+		tabManager.add(new Tab<ChannelTabModel>(title, new ChannelTabModel(), true));
 	}
 
 	public void channelMessageActionListener(ActionEvent event) {

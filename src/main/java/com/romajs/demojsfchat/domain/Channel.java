@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
 @SuppressWarnings("serial")
-public class Channel implements Serializable  {
+public class Channel implements Serializable {
 
 	@Id
 	@SequenceGenerator(name = "CHANNEL_ID", sequenceName = "CHANNEL_SEQ", allocationSize = 1)
@@ -18,6 +19,17 @@ public class Channel implements Serializable  {
 	private Long id;
 
 	private String name;
+
+	@ManyToOne
+	private User owner;
+
+	public Channel() {
+	}
+
+	public Channel(String name, User owner) {
+		this.name = name;
+		this.owner = owner;
+	}
 
 	public Long getId() {
 		return id;
@@ -33,6 +45,14 @@ public class Channel implements Serializable  {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 }
