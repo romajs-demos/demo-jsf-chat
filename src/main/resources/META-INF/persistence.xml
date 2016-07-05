@@ -6,16 +6,14 @@
 	
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<non-jta-data-source>java:/comp/env/jdbc/UserDS</non-jta-data-source>
-		
+		<mapping-file>META-INF/jpa-mapping.xml</mapping-file>
+
 		<properties>
-		
 			<property name="hibernate.default_schema" value="public" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-		
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.connection.charSet" value="UTF-8" />
-			
 		</properties>
 		
 	</persistence-unit>
