@@ -1,0 +1,10 @@
+<Resource id="demojsfchatDS" type="DataSource">
+  JdbcDriver = org.hsqldb.jdbcDriver
+  JdbcUrl = jdbc:hsqldb:mem:demojsfchatDB
+</Resource>
+
+<Resource id="demojsfchatDSUnmanaged" type="DataSource">
+  JdbcDriver = org.hsqldb.jdbcDriver
+  JdbcUrl = jdbc:hsqldb:mem:demojsfchatDB
+  JtaManaged = false
+</Resource>

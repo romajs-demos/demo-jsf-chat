@@ -31,6 +31,10 @@ public class TabManager<E> implements Serializable, Iterable<Tab<E>> {
 	/*
 	 * actions
 	 */
+	
+	public void add(String title, E model, boolean closable) {
+		this.add(new Tab<E>(title, model, false));
+	}
 
 	public void add(Tab<E> tab) {
 
@@ -93,6 +97,7 @@ public class TabManager<E> implements Serializable, Iterable<Tab<E>> {
 		remove(trigerredIndex);
 	}
 
+	@Deprecated // FIXME: change need index as parameter
 	public void change() {
 		System.out.println("@change:");
 		System.out.println("activeIndex: " + activeIndex + " \""

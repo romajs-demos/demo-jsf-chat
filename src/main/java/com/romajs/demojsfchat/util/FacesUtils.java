@@ -24,11 +24,6 @@ import org.apache.log4j.Logger;
 @ApplicationScoped
 public class FacesUtils implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 581045127881038966L;
-
 	private static final Logger log = Logger.getRootLogger();
 
 	public FacesContext getFacesContext() {

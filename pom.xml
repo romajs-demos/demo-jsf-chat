@@ -10,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<jetty.http.port>8080</jetty.http.port>
+		<dev.http.port>8080</dev.http.port>
 		<java.version>1.7</java.version>
 	</properties>
 
@@ -24,145 +24,46 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.0.5.v20130815</version>
+		    <plugin>
+				<groupId>org.apache.openejb.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>1.7.4</version>
 				<configuration>
-					<httpConnector>
-						<port>${jetty.http.port}</port>
-					</httpConnector>
-					<useProvidedScope>true</useProvidedScope>
-					<contextXml>src/main/webapp/WEB-INF/jetty.xml</contextXml>
-					<webApp>
-						<contextPath>/demo-jsf-chat</contextPath>
-						<jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
-						<overrideDescriptor>src/main/webapp/WEB-INF/override-web.xml</overrideDescriptor>
-						<!-- <extraClasspath>target/classes/</extraClasspath> -->
-					</webApp>
-					<!-- <connectors> -->
-					<!-- <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector"> -->
-					<!-- <port>9000</port> -->
-					<!-- <maxIdleTime>60000</maxIdleTime> -->
-					<!-- </connector> -->
-					<!-- </connectors> -->
-					<!-- <systemProperties> -->
-					<!-- <systemProperty> -->
-					<!-- <key>com.arjuna.ats.arjuna.objectstore.objectStoreDir</key> -->
-					<!-- <value>${main.dir}/target/ajura</value> -->
-					<!-- </systemProperty> -->
-					<!-- <systemProperty> -->
-					<!-- <key>com.arjuna.ats.arjuna.common.ObjectStoreEnvironmentBean.objectStoreDir</key> -->
-					<!-- <value>${main.dir}/target/ajura</value> -->
-					<!-- </systemProperty> -->
-					<!-- <systemProperty> -->
-					<!-- <key>javax.xml.bind.JAXBContext</key> -->
-					<!-- <value>com.sun.xml.internal.bind.v2.ContextFactory</value> -->
-					<!-- </systemProperty> -->
-					<!-- </systemProperties> -->
-					<scanIntervalSeconds>1000</scanIntervalSeconds>
+				    <synchronization>
+						<extensions>
+							<extension>.class</extension>
+							<extension>.java</extension>
+							<extension>.xhtml</extension>
+						</extensions>
+						<updateInterval>2</updateInterval>
+				    </synchronization>
+				    <reloadOnUpdate>true</reloadOnUpdate>
+					<tomeeClassifier>plus</tomeeClassifier>
+					<tomeeVersion>1.7.4</tomeeVersion>
+					<tomeeHttpPort>${dev.http.port}</tomeeHttpPort>
 				</configuration>
-			</plugin>
+		    </plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
+		<!-- Commons -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.8</version>
+		</dependency>
 		<!-- JEE -->
         <dependency>
         	<groupId>javax</groupId>
            	<artifactId>javaee-web-api</artifactId>
            	<version>6.0</version>
         </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.1.0.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- JTA-->
-		<dependency>
-			<groupId>org.jboss.jbossts</groupId>
-			<artifactId>jbossjta</artifactId>
-			<version>4.16.6.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Weld -->
-		<dependency>
-			<groupId>org.jboss.weld.se</groupId>
-			<artifactId>weld-se-core</artifactId>
-			<version>1.1.16.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>1.1.16.Final</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- JSF -->
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.4</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
-		</dependency>
-		<!-- JPA / Hibernate -->
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.0.1.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.1.12.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- DB/DataSource -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.8</version>
-		</dependency>
-		<!-- DB/Driver -->
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.3.2</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.21</version>
 		</dependency>
 		<!-- Logging -->
 		<dependency>

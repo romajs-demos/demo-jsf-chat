@@ -1,78 +1,76 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h:html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<f:view encoding="UTF-8" contentType="text/html">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta HTTP-EQUIV="EXPIRES" CONTENT="0" />
+		<title>romajs - demo jsf chat</title>
+	</f:facet>
+	<link href="static/css/css.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
 
-<f:view contentType="text/html">
-	<h:head>
-		<f:facet name="first">
-			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
-			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-			<title>romajs - demo jsf chat</title>
-		</f:facet>
-		<link href="static/css/css.css" rel="stylesheet" type="text/css" />
-	</h:head>
-	<h:body>
+	<!-- AjaxStatus -->
+	<p:ajaxStatus onstart="ajaxDlg.show();" onsuccess="ajaxDlg.hide();"
+		onerror="errorDlg.show()" oncomplete="ajaxDlg.hide();"
+		onprestart="ajaxDlg.show();" />
 
-		<!-- AjaxStatus -->
-		<p:ajaxStatus onstart="ajaxDlg.show();" onsuccess="ajaxDlg.hide();"
-			onerror="errorDlg.show()" oncomplete="ajaxDlg.hide();"
-			onprestart="ajaxDlg.show();" />
+	<!-- Ajax Status -->
+	<p:dialog visible="false" appendTo="@(body)" modal="false"
+		widgetVar="ajaxDlg" showHeader="false" draggable="false"
+		closable="false" resizable="false" showEffect="fade"
+		hideEffect="fade" style="text-align:center">
+		<p:graphicImage value="static/img/ajax.gif" />
+		<br />
+		<h:outputText value="Please wait..." />
+	</p:dialog>
 
-		<!-- Ajax Status -->
-		<p:dialog visible="false" appendTo="@(body)" modal="false"
-			widgetVar="ajaxDlg" showHeader="false" draggable="false"
-			closable="false" resizable="false" showEffect="fade"
-			hideEffect="fade" style="text-align:center">
-			<p:graphicImage value="static/img/ajax.gif" />
-			<br />
-			<h:outputText value="Please wait..." />
-		</p:dialog>
+	<!-- Error Dialog -->
+	<p:dialog visible="false" appendTo="@(body)" modal="true"
+		widgetVar="errorDlg" showHeader="true" header="ERROR"
+		draggable="false" closable="false" resizable="false"
+		showEffect="fade" hideEffect="fade" style="text-align:center;">
+		<br />
+		<p:graphicImage value="static/img/error.png" style="width:64px" />
+		<br />
+		<br />
+		<h:outputText value="An ERROR has been ocurred" />
+		<br />
+		Try to <h:link value="reload" onclick="javascript:reload();" /> to see more details.
+		<br />
+	</p:dialog>
 
-		<!-- Error Dialog -->
-		<p:dialog visible="false" appendTo="@(body)" modal="true"
-			widgetVar="errorDlg" showHeader="true" header="ERROR"
-			draggable="false" closable="false" resizable="false"
-			showEffect="fade" hideEffect="fade" style="text-align:center;">
-			<br />
-			<p:graphicImage value="static/img/error.png" style="width:64px" />
-			<br />
-			<br />
-			<h:outputText value="An ERROR has been ocurred" />
-			<br />
-			Try to <h:link value="reload" onclick="javascript:reload();" /> to see more details.
-			<br />
-		</p:dialog>
+	<!-- Growl -->
+	<p:growl id="growl" showDetail="true" autoUpdate="true" />
 
-		<!-- Growl -->
-		<p:growl id="growl" showDetail="true" autoUpdate="true" />
+	<!-- Layout -->
+	<p:layout fullPage="true">
 
-		<!-- Layout -->
-		<p:layout fullPage="true">
+		<!-- Top -->
+		<p:layoutUnit position="north" id="top" size="105">
+			<ui:include src="top.xhtml" />
+		</p:layoutUnit>
 
-			<!-- Top -->
-			<p:layoutUnit position="north" id="top" size="105">
-				<ui:include src="top.xhtml" />
-			</p:layoutUnit>
+		<!-- Menu -->
+		<ui:insert name="menu" />
 
-			<!-- Menu -->
-			<ui:insert name="menu" />
+		<!-- Content -->
+		<p:layoutUnit position="center" id="content">
+			<ui:insert name="content" />
+		</p:layoutUnit>
 
-			<!-- Content -->
-			<p:layoutUnit position="center" id="content">
-				<ui:insert name="content" />
-			</p:layoutUnit>
+		<!-- Footer -->
+		<p:layoutUnit position="south" id="footer">
+			<ui:insert name="footer">
+				<a href="http://twitter.com/romajs">romajs</a> &copy; 2016. All righs reserved.
+			</ui:insert>
+		</p:layoutUnit>
 
-			<!-- Footer -->
-			<p:layoutUnit position="south" id="footer">
-				<ui:insert name="footer">
-					<a href="http://twitter.com/romajs">romajs</a> &copy; 2016. All righs reserved.
-				</ui:insert>
-			</p:layoutUnit>
-
-		</p:layout>
-	</h:body>
+	</p:layout>
+</h:body>
 </f:view>
-</h:html>
+</html>

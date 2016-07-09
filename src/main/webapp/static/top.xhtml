@@ -1,39 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h:html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-<f:view contentType="text/html">
-	<h:head>
-		<f:facet name="first">
-			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
-			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
-			<meta http-equiv="cache-control" content="no-cache" />
-			<meta HTTP-EQUIV="EXPIRES" CONTENT="0" />
-			<title>Layout</title>
-		</f:facet>
-	</h:head>
-	<h:body>
-		<img src="static/img/logo.png" />
-		<h1>demo jsf chat</h1>
-		<!-- <h3>jsf web application</h3> -->
-		<ui:insert name="login_info">
-			<h:panelGroup class="login_info">
-				<h:panelGroup rendered="#{sessionManagedBean.loggedIn}">
-					<h:form>
-						<h:outputText value="Welcome " />
-						<h:outputLink value="userpanel.jsf">#{sessionManagedBean.user.username}</h:outputLink>
-						<p:commandButton value="Logout"
-							actionListener="#{sessionManagedBean.logout}" />
-					</h:form>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{!sessionManagedBean.loggedIn}">
-					<h:outputLink value="login.jsf">Login</h:outputLink>
-				</h:panelGroup>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<f:view encoding="UTF-8" contentType="text/html">
+<h:body>
+	<img src="static/img/logo.png" />
+	<h1>demo jsf chat</h1>
+	<!-- <h3>jsf web application</h3> -->
+	<ui:insert name="login_info">
+		<h:panelGroup class="login_info">
+			<h:panelGroup rendered="#{sessionManagedBean.loggedIn}">
+				<h:form>
+					<h:outputText value="Welcome " />
+					<h:outputLink value="userpanel.jsf">#{sessionManagedBean.user.username}</h:outputLink>
+					<p:commandButton value="Logout"
+						actionListener="#{sessionManagedBean.logout}" />
+				</h:form>
 			</h:panelGroup>
-		</ui:insert>
-	</h:body>
+			<h:panelGroup rendered="#{!sessionManagedBean.loggedIn}">
+				<h:outputLink value="login.jsf">Login</h:outputLink>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:insert>
+</h:body>
 </f:view>
-</h:html>
+</html>

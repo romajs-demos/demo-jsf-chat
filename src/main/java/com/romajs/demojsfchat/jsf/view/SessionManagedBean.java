@@ -1,8 +1,8 @@
 package com.romajs.demojsfchat.jsf.view;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -11,12 +11,12 @@ import com.romajs.demojsfchat.filter.AuthenticationFilter;
 import com.romajs.demojsfchat.service.UserService;
 import com.romajs.demojsfchat.util.FacesUtils;
 
-@ManagedBean
+@Named("sessionManagedBean")
 @SessionScoped
 public class SessionManagedBean {
 
-	@ManagedProperty(value = "#{facesUtils}")
-	private FacesUtils facesUtils;
+//	@ManagedProperty(value = "#{facesUtils}")
+//	private FacesUtils facesUtils;
 
 	private String username;
 
@@ -25,8 +25,8 @@ public class SessionManagedBean {
 	private User user;
 
 	public boolean isLoggedIn() {
-		return facesUtils.getExternalContext().getSessionMap()
-				.get(AuthenticationFilter.AUTH_KEY) != null;
+		return false ;// facesUtils.getExternalContext().getSessionMap()
+//				.get(AuthenticationFilter.AUTH_KEY) != null;
 	}
 
 	private String encryptedPassword(String password) {
@@ -37,14 +37,14 @@ public class SessionManagedBean {
 		UserService service = new UserService();
 		user = service.getUser(username, encryptedPassword(password));
 		if (user != null) {
-			facesUtils.getSessionMap().put(AuthenticationFilter.AUTH_KEY,
-					user.getUsername());
-			facesUtils.info("Login Successfully",
-					"User \"" + user.getUsername() + "\" is now logged in");
-			facesUtils.redirect(AuthenticationFilter.HOME_URL);
+//			facesUtils.getSessionMap().put(AuthenticationFilter.AUTH_KEY,
+//					user.getUsername());
+//			facesUtils.info("Login Successfully",
+//					"User \"" + user.getUsername() + "\" is now logged in");
+//			facesUtils.redirect(AuthenticationFilter.HOME_URL);
 			return;
 		} else {
-			facesUtils.warn("Login failed", "Invalid username e/or password");
+//			facesUtils.warn("Login failed", "Invalid username e/or password");
 		}
 	}
 
@@ -52,18 +52,18 @@ public class SessionManagedBean {
 		user = null;
 		username = null;
 		password = null;
-		facesUtils.getExternalContext().getSessionMap()
-				.remove(AuthenticationFilter.AUTH_KEY);
-		facesUtils.redirect(AuthenticationFilter.LOGIN_URL);
+//		facesUtils.getExternalContext().getSessionMap()
+//				.remove(AuthenticationFilter.AUTH_KEY);
+//		facesUtils.redirect(AuthenticationFilter.LOGIN_URL);
 	}
 
-	public FacesUtils getFacesUtils() {
-		return facesUtils;
-	}
-
-	public void setFacesUtils(FacesUtils facesUtils) {
-		this.facesUtils = facesUtils;
-	}
+//	public FacesUtils getFacesUtils() {
+//		return facesUtils;
+//	}
+//
+//	public void setFacesUtils(FacesUtils facesUtils) {
+//		this.facesUtils = facesUtils;
+//	}
 
 	public String getUsername() {
 		return username;
