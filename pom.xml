@@ -31,11 +31,12 @@
 				<configuration>
 				    <synchronization>
 						<extensions>
+							<extension>.css</extension>
 							<extension>.class</extension>
-							<extension>.java</extension>
+							<!-- <extension>.java</extension> -->
 							<extension>.xhtml</extension>
 						</extensions>
-						<updateInterval>2</updateInterval>
+						<updateInterval>5</updateInterval>
 				    </synchronization>
 				    <reloadOnUpdate>true</reloadOnUpdate>
 					<tomeeClassifier>plus</tomeeClassifier>

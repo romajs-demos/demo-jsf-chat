@@ -60,3 +60,21 @@ a:link,a:visited {
 a:hover,a:active {
 	text-decoration: underline;
 }
+
+.ui-widget-content.ui-tabs-panel {
+	padding: 0;
+}
+
+.ui-widget.ui-panelgrid {
+	width: 100%;
+}
+
+.ui-widget.ui-inputfield.ui-inputtextarea {
+	width: 99%;
+	height: 393px;
+}
+
+.ui-widget.ui-inputfield.ui-inputtext {
+	width: 94%;
+	margin-right: 4px;
+}

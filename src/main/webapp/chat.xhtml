@@ -15,15 +15,15 @@
 					<!-- messages: #{tab.model.buffer} -->
 					<p:panelGrid>
 						<p:row>
-							<p:column colspan="2">
+							<p:column>
 								<p:inputTextarea value="#{tab.model.buffer}" readonly="true"/>
+							</p:column>
+							<p:column rowspan="2">
 							</p:column>
 						</p:row>
 						<p:row>
 							<p:column>
 								<p:inputText value="#{text}"/>
-							</p:column>
-							<p:column>
 								<p:commandButton value="Send" actionListener="#{chat.channelMessageActionListener}" update="@form">
 									<f:attribute name="model" value="#{tab.model}"/>
 									<f:attribute name="text" value="#{text}"/>
