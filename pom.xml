@@ -19,10 +19,21 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
+			</plugin>
+			<plugin>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <version>2.17</version>
+		      <configuration>
+		        <systemPropertyVariables>
+		          <tomee.httpPort>-1</tomee.httpPort>
+		          <tomee.stopPort>-1</tomee.stopPort>
+		        </systemPropertyVariables>
+		      </configuration>
 			</plugin>
 		    <plugin>
 				<groupId>org.apache.openejb.maven</groupId>
@@ -47,25 +58,41 @@
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.jboss.arquillian</groupId>
+	            <artifactId>arquillian-bom</artifactId>
+	            <version>1.1.11.Final</version>
+	            <scope>import</scope>
+	            <type>pom</type>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+		
 		<!-- Commons -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.8</version>
 		</dependency>
+
 		<!-- JEE -->
-        <dependency>
+        <!-- <dependency>
         	<groupId>javax</groupId>
            	<artifactId>javaee-web-api</artifactId>
            	<version>6.0</version>
-        </dependency>
+        </dependency> -->
+
 		<!-- JSF -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -77,13 +104,56 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+	    <dependency>
+		    <groupId>org.jboss.arquillian.junit</groupId>
+		    <artifactId>arquillian-junit-container</artifactId>
+		    <scope>test</scope>
+		</dependency>
+
+		<!-- <dependency>
+	        <groupId>org.jboss.spec</groupId>
+	        <artifactId>jboss-javaee-6.0</artifactId>
+	        <version>1.0.0.Final</version>
+	        <type>pom</type>
+	        <scope>provided</scope>
+	    </dependency>
+		<dependency>
+		    <groupId>org.jboss.arquillian.container</groupId>
+		    <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+		    <version>1.0.0.CR3</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss.weld</groupId>
+		    <artifactId>weld-core</artifactId>
+		    <version>1.1.5.Final</version>
+		    <scope>test</scope>
+		</dependency> -->
+		
+		<dependency>
+		    <groupId>org.apache.openejb</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>6.0-6</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.openejb</groupId>
+		  <artifactId>arquillian-tomee-embedded</artifactId>
+		  <version>1.7.1</version> <!--Current version-->
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.openejb</groupId>
+		  <artifactId>tomee-embedded</artifactId>
+		  <version>1.7.1</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
